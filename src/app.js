@@ -1,28 +1,64 @@
 console.log('App.js is running!');
 
-// JSX - Javascript XML
-var template = (
-    <div>
-        <h1>Indecision App</h1>
-        <p> That is super cool.</p>
-        <ol>
-            <li>Item One</li>
-            <li>Item Two</li>
-        </ol>
-        <div id="rootyTootyPointyShooty"></div>
-    </div>
-);
+const app = {
+    title: "Indecision App",
+    subtitle: "Decisions for the indecisive...",
+    options: []
+}
 
-var templateTwo = (
-    <div>
-        <h1>Rendering a seperate template</h1>
-        <p>Some text</p>
-    </div>
-);
+const getOptions = (options) => {
+    if(options.length > 0){
+        return <p>Here are your options</p>
+    }
+    return <p>No options</p>
+};
 
-var appRoot = document.getElementById('app');
+const onFormSubmit = (e) => {
+    e.preventDefault();
 
-// interesting... render overwrites the content without complaint.
-ReactDOM.render(templateTwo, appRoot);
+    const option = e.target.elements.option.value.trim();
+
+    if(option) {
+        app.options.push(option);
+    }
+
+    e.target.elements.option.value = '';
+    render();
+};
+
+const onRemoveAll = () => {
+    app.options = [];
+    render();
+}
+
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    alert(option);
+};
+
+const render = () => {
+    // JSX - Javascript XML
+    const jsx = (
+        <div>
+            <h1>{app.title}</h1>
+            {app.subtitle && <p>{app.subtitle}</p>}
+            <p>{app.options.length > 0 ? "Here are your options" : "No options"}</p>
+            <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
+            <button onClick={onRemoveAll}>Remove All</button>
+            <ol>
+                { app.options.map(option => <li key={option}>{option}</li>) }
+            </ol>
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="option"/>
+                <button>Add Option</button>
+            </form>
+        </div>
+    );
+    ReactDOM.render(jsx, appRoot);
+}
 
 
+const appRoot = document.getElementById('app');
+
+render();
