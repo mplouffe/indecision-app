@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "live-server public/",
-    "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
-    "build": "webpack --watch"
+    "build": "webpack",
+    "dev-server": "webpack-dev-server"
   },
   "author": "Matheu Plouffe",
   "license": "ISC",
@@ -17,7 +17,7 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "live-server": "^1.2.0"
+    "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
     "react": "^16.0.0",
