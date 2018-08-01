@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "node-sass": "^4.9.2",
+    "normalize.css": "^8.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-modal": "^2.2.2",
